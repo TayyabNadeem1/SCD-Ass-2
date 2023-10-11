@@ -87,6 +87,7 @@ public class GenericStack<T> {
         stackString.display();
 
         System.out.println("String Stack size after pop: " + stackString.size());
+
         
     }
 }
