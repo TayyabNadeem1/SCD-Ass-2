@@ -4,24 +4,32 @@ import java.util.List;
 
 public class IntervalMerger {
     public static List<int[]> mergeIntervals(List<int[]> intervals) {
-       
-        List<int[]> mergingList = new ArrayList<>();
-        mergingList.add(intervals.get(0));
+        
+
+        int writeIndex = 0; 
 
         for (int i = 1; i < intervals.size(); i++) {
             int[] first = intervals.get(i);
-            int[] second = mergingList.get(mergingList.size() - 1);
+            int[] second = intervals.get(writeIndex);
 
             if (first[0] <= second[1]) {
                 
                 second[1] = Math.max(second[1], first[1]);
             } else {
                 
-                mergingList.add(first);
+                writeIndex++;
+                intervals.set(writeIndex, first);
             }
         }
 
-        return mergingList;
+        
+        
+        int newSize = writeIndex + 1;
+        while (intervals.size() > newSize) {
+            intervals.remove(intervals.size() - 1);
+        }
+        
+        return intervals;
     }
 
     public static void main(String[] args) {
@@ -32,10 +40,10 @@ public class IntervalMerger {
                 new int[]{15, 18}
         ));
 
-        List<int[]> result = mergeIntervals(intervals);
+        mergeIntervals(intervals);
 
-        
-        for (int[] interval : result) {
+        for (int i = 0; i < intervals.size(); i++) {
+            int[] interval = intervals.get(i);
             System.out.println(Arrays.toString(interval));
         }
     }
