@@ -5,7 +5,6 @@ import java.util.List;
 public class IntervalMerger {
     public static List<int[]> mergeIntervals(List<int[]> intervals) {
         
-
         int writeIndex = 0; 
 
         for (int i = 1; i < intervals.size(); i++) {
@@ -28,7 +27,7 @@ public class IntervalMerger {
         while (intervals.size() > newSize) {
             intervals.remove(intervals.size() - 1);
         }
-        
+
         return intervals;
     }
 
